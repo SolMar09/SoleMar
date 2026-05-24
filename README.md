@@ -1,2 +1,812 @@
-# Sol-Mar
-Apartamento Armação de Pêra
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sol &amp; Mar | Arrendamento Apartamento Algarve</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f6f3ee;
+      --card: #ffffff;
+      --soft: #efe7dc;
+      --primary: #16324a;
+      --primary-2: #244a66;
+      --accent: #9a7446;
+      --text: #24313c;
+      --muted: #6b7883;
+      --border: rgba(22, 50, 74, 0.08);
+      --shadow: 0 14px 34px rgba(22, 50, 74, 0.12);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(154, 116, 70, 0.08), transparent 26%),
+        linear-gradient(180deg, #fbfaf8 0%, var(--bg) 100%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(22, 50, 74, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .topbar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      padding: 14px 0;
+    }
+
+    .site-logo {
+      color: #fff;
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+    }
+
+    .top-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      color: rgba(255,255,255,0.94);
+      font-size: 0.95rem;
+    }
+
+    .hero {
+      padding: 64px 0 40px;
+    }
+
+    .hero-box {
+      position: relative;
+      overflow: hidden;
+      border-radius: 30px;
+      color: #fff;
+      background:
+        linear-gradient(135deg, rgba(22, 50, 74, 0.88), rgba(36, 74, 102, 0.70)),
+        url("v1.jpeg") center/cover;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      padding: 54px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.14);
+      font-size: 0.86rem;
+      font-weight: 500;
+    }
+
+    h1 {
+      margin: 18px 0 14px;
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      line-height: 1.08;
+    }
+
+    .hero-text {
+      margin: 0 0 24px;
+      max-width: 650px;
+      font-size: 1.02rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.94);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 14px 22px;
+      border-radius: 999px;
+      border: 0;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: #fff;
+      color: var(--primary);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.14);
+    }
+
+    .btn-secondary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.14);
+    }
+
+    .btn-outline {
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .hero-facts {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .fact-pill {
+      min-height: 88px;
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .fact-pill strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 1rem;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1.55fr 0.95fr;
+      gap: 24px;
+      margin: 28px 0 42px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+
+    .card h2 {
+      margin: 0 0 16px;
+      color: var(--primary);
+      font-size: 1.45rem;
+    }
+
+    .copy {
+      line-height: 1.85;
+    }
+
+    .highlights {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .highlight {
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: var(--soft);
+      border-left: 4px solid var(--accent);
+      font-size: 0.95rem;
+    }
+
+    .aside-stack {
+      display: grid;
+      gap: 24px;
+    }
+
+    .owner-box {
+      text-align: center;
+    }
+
+    .owner-avatar {
+      width: 112px;
+      height: 112px;
+      margin: 0 auto 16px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: linear-gradient(135deg, #efe3d2, #e5d4be);
+      border: 4px solid rgba(154, 116, 70, 0.18);
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .contact-box {
+      margin-top: 20px;
+      padding: 18px;
+      border-radius: 20px;
+      text-align: left;
+      background: linear-gradient(135deg, rgba(154, 116, 70, 0.08), rgba(239, 231, 220, 0.8));
+    }
+
+    .contact-label {
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .contact-title {
+      margin-bottom: 14px;
+      color: var(--primary);
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .contact-actions {
+      display: grid;
+      gap: 10px;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .contact-link.phone {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .contact-link.email {
+      background: #fff;
+      color: var(--primary);
+      border: 1px solid var(--border);
+    }
+
+    .location-box {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 16px;
+      background: var(--soft);
+      text-align: left;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .video-shell {
+      overflow: hidden;
+      margin-top: 18px;
+      border-radius: 20px;
+      background: #000;
+    }
+
+    .video-shell iframe {
+      width: 100%;
+      height: 500px;
+      display: block;
+      border: 0;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin: 44px 0 18px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      color: var(--primary);
+      font-size: 1.7rem;
+    }
+
+    .section-title p {
+      margin: 0;
+      max-width: 640px;
+      color: var(--muted);
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .info-card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+
+    .info-card h3 {
+      margin: 0 0 12px;
+      color: var(--primary);
+      font-size: 1.08rem;
+    }
+
+    .info-card ul {
+      margin: 0;
+      padding-left: 18px;
+      line-height: 1.8;
+    }
+
+    .gallery-nav {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .gallery-nav button {
+      border: 0;
+      background: #fff;
+      color: var(--primary);
+      padding: 10px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 500;
+      box-shadow: 0 6px 18px rgba(22, 50, 74, 0.08);
+    }
+
+    .gallery-nav button.active {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .gallery-item {
+      overflow: hidden;
+      border-radius: 20px;
+      background: #fff;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-3px);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+    }
+
+    .gallery-caption {
+      padding: 14px 16px 16px;
+    }
+
+    .gallery-caption strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--primary);
+    }
+
+    .footer {
+      padding: 42px 0 54px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      padding: 28px;
+      align-items: center;
+      justify-content: center;
+      background: rgba(8, 17, 27, 0.84);
+    }
+
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lightbox-inner {
+      position: relative;
+      width: min(1100px, 100%);
+      max-height: 92vh;
+    }
+
+    .lightbox img {
+      width: 100%;
+      max-height: 92vh;
+      object-fit: contain;
+      border-radius: 18px;
+      background: #0c1722;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -12px;
+      right: -4px;
+      width: 42px;
+      height: 42px;
+      border: 0;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.1rem;
+      background: #fff;
+      color: var(--primary);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+
+    @media (max-width: 980px) {
+      .main-grid,
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero-facts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero-content {
+        padding: 34px 24px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .video-shell iframe {
+        height: 260px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .topbar-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .gallery-grid,
+      .highlights,
+      .hero-facts {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-item img {
+        height: 220px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="site-logo">Sol &amp; Mar</div>
+      <nav class="top-links">
+        <a href="#video">Vídeo</a>
+        <a href="#detalhes">Detalhes</a>
+        <a href="#galeria">Galeria</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-box">
+        <div class="hero-content">
+          <div class="eyebrow">☀️ Arrendamento Apartamento Algarve</div>
+          <h1>T1+1 em Armação de Pêra, perto da praia</h1>
+          <p class="hero-text">
+            Apartamento confortável, luminoso e totalmente equipado, com piscina em condomínio fechado,
+            garagem coberta, varanda ampla e tudo preparado para umas férias tranquilas no Algarve.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#video">Ver vídeo</a>
+            <a class="btn btn-secondary" href="tel:965162066">📞 Fale com o Proprietário</a>
+            <a class="btn btn-outline" href="#galeria">Ver fotos</a>
+          </div>
+
+          <div class="hero-facts">
+            <div class="fact-pill">
+              <strong>T1+1</strong>
+              Quarto principal e espaço extra para dormir com conforto.
+            </div>
+            <div class="fact-pill">
+              <strong>Piscina & garagem</strong>
+              Condomínio fechado, espreguiçadeiras privadas e garagem coberta.
+            </div>
+            <div class="fact-pill">
+              <strong>5.º andar</strong>
+              Edifício com 2 elevadores e boa acessibilidade.
+            </div>
+            <div class="fact-pill">
+              <strong>Tudo incluído</strong>
+              Internet, gás, atoalhados e detergentes disponíveis.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="main-grid" id="detalhes">
+        <div class="card">
+          <h2>Sobre o apartamento</h2>
+          <div class="copy">
+            Apartamento <strong>T1+1</strong> com <strong>1 quarto com cama de casal e roupeiro</strong>,
+            <strong>1 casa de banho</strong> com bidé, sanita, lava-mãos e banheira, e
+            <strong>1 despensa com máquina de lavar roupa</strong> e detergentes incluídos.
+            <br><br>
+            A <strong>cozinha está totalmente equipada</strong> com esquentador, fogão, forno, torradeira,
+            varinha mágica, máquina de lavar loiça, micro-ondas, combinado e máquina de café.
+            Podes fazer refeições na cozinha, na sala ou na varanda.
+            <br><br>
+            A <strong>sala é ampla</strong> e tem <strong>2 sofás-cama</strong>, zona de refeições
+            e bastante arrumação. A <strong>varanda é grande e espaçosa</strong>, ideal para aproveitar o sol.
+            <br><br>
+            O apartamento inclui ainda <strong>garagem coberta</strong>,
+            <strong>piscina em condomínio fechado</strong>, <strong>espreguiçadeiras privadas</strong>,
+            <strong>guarda-sol</strong>, <strong>duas cadeiras de praia</strong> e <strong>internet incluída</strong>.
+            Também não precisas de levar atoalhados: lençóis, almofadas, toalhas de banho e rosto,
+            toalha de mesa e panos de loiça são disponibilizados.
+          </div>
+
+          <div class="highlights">
+            <div class="highlight">🛏️ Quarto com cama de casal e roupeiro</div>
+            <div class="highlight">🛋️ Sala ampla com 2 sofás-cama</div>
+            <div class="highlight">🍳 Cozinha completa e equipada</div>
+            <div class="highlight">🧺 Despensa com máquina de lavar roupa</div>
+            <div class="highlight">🌐 Internet incluída</div>
+            <div class="highlight">🚗 Garagem coberta</div>
+            <div class="highlight">🏊 Piscina em condomínio fechado</div>
+            <div class="highlight">🛗 5.º andar com 2 elevadores</div>
+          </div>
+        </div>
+
+        <div class="aside-stack">
+          <div class="card owner-box" id="contacto">
+            <img class="owner-avatar" src="proprietario.jpeg" alt="Proprietário Manuel" onerror="this.style.display='none';">
+            <h2>Fale com o Proprietário</h2>
+            <p class="muted">Contacto direto com Manuel para disponibilidade e condições.</p>
+
+            <div class="contact-box">
+              <div class="contact-label">Contacto direto</div>
+              <div class="contact-title">Disponibilidade sob consulta</div>
+              <div class="contact-actions">
+                <a class="contact-link phone" href="tel:965162066">📞 965 162 066</a>
+                <a class="contact-link email" href="mailto:apartamentosolemar09@gmail.com">✉️ magcorticas@hotmail.com</a>
+              </div>
+            </div>
+
+            <div class="location-box">
+              <strong>Localização</strong><br>
+              R. Álvaro Gomes<br>
+              Armação de Pêra, Faro
+            </div>
+          </div>
+
+          <div class="card" id="video">
+            <h2>Vídeo do apartamento</h2>
+            <p class="muted">Visualização direta do espaço antes da reserva.</p>
+            <div class="video-shell">
+              <iframe
+                src="https://www.youtube.com/embed/TAAc319qnhc"
+                title="Vídeo do apartamento"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title">
+        <div>
+          <h2>Comodidades e pontos fortes</h2>
+          <p>Uma apresentação clara, elegante e organizada para mostrar tudo o que o apartamento oferece.</p>
+        </div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>Incluído no apartamento</h3>
+          <ul>
+            <li>Internet em toda a casa</li>
+            <li>Gás incluído</li>
+            <li>Lençóis, toalhas e panos de loiça</li>
+            <li>Detergentes para cozinha e lavandaria</li>
+            <li>Guarda-sol e 2 cadeiras de praia</li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <h3>Ideal para férias</h3>
+          <ul>
+            <li>Praia e comércio a pé</li>
+            <li>Varanda grande para refeições</li>
+            <li>Piscina em condomínio fechado</li>
+            <li>Garagem coberta privada</li>
+            <li>2 elevadores no edifício</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section-title" id="galeria">
+        <div>
+          <h2>Galeria por divisões</h2>
+          <p>Clica numa divisão para veres só essas fotos, ou abre cada imagem em tamanho maior.</p>
+        </div>
+      </div>
+
+      <div class="gallery-nav" id="galleryNav"></div>
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </div>
+  </section>
+
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <div class="lightbox-inner">
+      <button class="lightbox-close" type="button" onclick="closeLightbox(event)">✕</button>
+      <img id="lightboxImage" src="" alt="Imagem ampliada">
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      Sol &amp; Mar · Arrendamento Apartamento Algarve · Armação de Pêra
+    </div>
+  </footer>
+
+  <script>
+    const galleryData = {
+      entrada: ["entrada.jpeg", "al1.jpeg", "al2.jpeg", "al3.jpeg", "al4.jpeg"],
+      quarto: ["q1.jpeg", "q2.jpeg", "q3.jpeg", "q4.jpeg", "q5.jpeg", "q6.jpeg", "q7.jpeg", "q8.jpeg"],
+      sala: ["s1.jpeg", "s2.jpeg", "s3.jpeg", "s4.jpeg", "s5.jpeg", "s6.jpeg", "s7.jpeg", "s8.jpeg", "s9.jpeg"],
+      cozinha: ["2c.jpeg", "3c.jpeg", "4c.jpeg", "5c.jpeg", "6c.jpeg", "7c.jpeg", "8c.jpeg"],
+      casadebanho: ["1cb.jpeg", "2cb.jpeg", "3cb.jpeg", "4cb.jpeg"],
+      varanda: ["v1.jpeg", "v2.jpeg", "v3.jpeg", "v4.jpeg", "v5.jpeg", "v6.jpeg"],
+      piscina: ["pisc1.jpeg", "pisc2.jpeg", "pisc3.jpeg"],
+      garagem: ["garagem.jpeg"],
+      despensa: ["1d.jpeg", "2d.jpeg"]
+    };
+
+    const labels = {
+      all: "Todas",
+      entrada: "Entrada",
+      quarto: "Quarto",
+      sala: "Sala",
+      cozinha: "Cozinha",
+      casadebanho: "Casa de banho",
+      varanda: "Varanda",
+      piscina: "Piscina",
+      garagem: "Garagem",
+      despensa: "Despensa"
+    };
+
+    let currentCategory = "all";
+
+    function buildNav() {
+      const nav = document.getElementById("galleryNav");
+      const categories = ["all", ...Object.keys(galleryData)];
+
+      nav.innerHTML = categories.map(category => `
+        <button
+          class="${category === currentCategory ? "active" : ""}"
+          type="button"
+          onclick="setCategory('${category}')"
+        >
+          ${labels[category] || category}
+        </button>
+      `).join("");
+    }
+
+    function buildGallery() {
+      const grid = document.getElementById("galleryGrid");
+      const entries = [];
+
+      if (currentCategory === "all") {
+        Object.entries(galleryData).forEach(([category, images]) => {
+          images.forEach((src, index) => {
+            entries.push({ category, src, index });
+          });
+        });
+      } else {
+        galleryData[currentCategory].forEach((src, index) => {
+          entries.push({ category: currentCategory, src, index });
+        });
+      }
+
+      grid.innerHTML = entries.map(item => `
+        <article class="gallery-item" onclick="openLightbox('${item.src}')">
+          <img src="${item.src}" alt="${labels[item.category]} ${item.index + 1}" loading="lazy">
+          <div class="gallery-caption">
+            <strong>${labels[item.category]}</strong>
+            <span>Foto ${item.index + 1}</span>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function setCategory(category) {
+      currentCategory = category;
+      buildNav();
+      buildGallery();
+    }
+
+    function openLightbox(src) {
+      document.getElementById("lightboxImage").src = src;
+      document.getElementById("lightbox").classList.add("open");
+    }
+
+    function closeLightbox(event) {
+      if (event.target.id === "lightbox" || event.target.classList.contains("lightbox-close")) {
+        document.getElementById("lightbox").classList.remove("open");
+        document.getElementById("lightboxImage").src = "";
+      }
+    }
+
+    buildNav();
+    buildGallery();
+  </script>
+</body>
+</html>
